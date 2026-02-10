@@ -78,6 +78,8 @@ jobs:
           OMPL_BUILD_ARCH: ${{ matrix.arch }}
           CIBW_BUILD: ${{ matrix.pybuilds }}
           CIBW_SKIP: "cp*-manylinux_i686 cp*-musllinux* cp*-win32 pp*"
+          CIBW_MANYLINUX_X86_64_IMAGE: manylinux2014
+          CIBW_MANYLINUX_AARCH64_IMAGE: manylinux2014
           CIBW_TEST_SKIP: "cp311-* cp312-* cp313-* pp*"
           CIBW_BEFORE_BUILD_LINUX: |
             python scripts/fetch-vendor.py --config-file scripts/ffmpeg-8.0.json /tmp/vendor
@@ -154,7 +156,7 @@ jobs:
             set -ex
             # First, install the tool needed to add repositories
             # yum install -y dnf-utils
-            yum install -y cmake make gcc gcc-c++ pkgconfig libbsd-devel soxr-devel alsa-lib-devel compat-openssl10
+            yum install -y cmake make gcc gcc-c++ pkgconfig libbsd-devel soxr-devel alsa-lib-devel openssl
 
             # Detect architecture and add the correct NVIDIA CUDA repo for RHEL 8-based manylinux
             ARCH=$(uname -m)
