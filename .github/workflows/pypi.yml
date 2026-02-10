@@ -153,7 +153,7 @@ jobs:
           CIBW_BEFORE_ALL_LINUX: |
             set -ex
             # First, install the tool needed to add repositories
-            yum install -y dnf-utils
+            # yum install -y dnf-utils
             yum install -y cmake make gcc gcc-c++ pkgconfig libbsd-devel soxr-devel alsa-lib-devel compat-openssl10
 
             # Detect architecture and add the correct NVIDIA CUDA repo for RHEL 8-based manylinux
@@ -168,7 +168,8 @@ jobs:
             fi
 
             echo "--- Adding CUDA repo for $ARCH ---"
-            yum-config-manager --add-repo ${REPO_URL}
+            sudo curl -o /etc/yum.repos.d/cuda-rhel7.repo ${REPO_URL}
+            # yum-config-manager --add-repo ${REPO_URL}
             yum clean all
 
             echo "--- Installing CUDA Toolkit and build dependencies ---"
