@@ -47,7 +47,7 @@ jobs:
       - name: Set up Python
         uses: actions/setup-python@v6
         with:
-          python-version: '3.13'
+          python-version: '3.12'
 
       - name: Build source package
         if: matrix.os == 'ubuntu-latest'
@@ -156,7 +156,7 @@ jobs:
             set -ex
             # First, install the tool needed to add repositories
             # yum install -y dnf-utils
-            yum install -y cmake make gcc gcc-c++ pkgconfig libbsd-devel soxr-devel alsa-lib-devel openssl
+            yum install -y cmake make gcc gcc-c++ pkgconfig libbsd-devel soxr-devel alsa-lib-devel openssl-devel
 
             # Detect architecture and add the correct NVIDIA CUDA repo for RHEL 8-based manylinux
             ARCH=$(uname -m)
@@ -170,7 +170,7 @@ jobs:
             fi
 
             echo "--- Adding CUDA repo for $ARCH ---"
-            sudo curl -o /etc/yum.repos.d/cuda-rhel7.repo ${REPO_URL}
+            curl -o /etc/yum.repos.d/cuda-rhel7.repo ${REPO_URL}
             # yum-config-manager --add-repo ${REPO_URL}
             yum clean all
 
