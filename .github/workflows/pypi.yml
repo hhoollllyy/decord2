@@ -93,7 +93,6 @@ jobs:
             cp libdecord.so ..
           CIBW_BEFORE_BUILD_MACOS: |
             python scripts/fetch-vendor.py --config-file scripts/ffmpeg-8.0.json /tmp/vendor
-            brew install cmake
             mkdir build
             cd build
             cmake .. -DUSE_CUDA=OFF -DCMAKE_BUILD_TYPE=Release
@@ -185,7 +184,7 @@ jobs:
             cudnn
             yum install -y cmake make gcc gcc-c++ pkgconfig libbsd-devel soxr-devel alsa-lib-devel openssl-devel
             echo "--- Installing GCC Toolset 11 ---"
-            yum install -y gcc-toolset-11
+            yum install -y devtoolset-11-gcc
 
             # Enable the GCC 11 toolset for the rest of this script
             source /opt/rh/gcc-toolset-11/enable
