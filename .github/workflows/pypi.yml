@@ -3,11 +3,11 @@ name: Build and Publish to PyPI
 on:
   workflow_dispatch:
   push:
-    branches: [ master ]
+    branches: [ support-manylinux2014-&-cu124  ]
     tags:
       - "v*"
   pull_request:
-    branches: [ master ]
+    branches: [ support-manylinux2014-&-cu124  ]
 
 jobs:
   build_wheels:
