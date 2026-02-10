@@ -77,7 +77,7 @@ jobs:
           CIBW_ARCHS_MACOS: ${{ matrix.arch }}
           OMPL_BUILD_ARCH: ${{ matrix.arch }}
           CIBW_BUILD: ${{ matrix.pybuilds }}
-          CIBW_SKIP: "cp*-manylinux_i686 cp*-musllinux* cp*-win32 pp*"
+          CIBW_SKIP: "cp*-manylinux_i686 cp*-musllinux* cp*-win32"
           CIBW_MANYLINUX_X86_64_IMAGE: manylinux2014
           CIBW_MANYLINUX_AARCH64_IMAGE: manylinux2014
           CIBW_TEST_SKIP: "cp311-* cp312-* cp313-* pp*"
@@ -93,7 +93,7 @@ jobs:
             cp libdecord.so ..
           CIBW_BEFORE_BUILD_MACOS: |
             python scripts/fetch-vendor.py --config-file scripts/ffmpeg-8.0.json /tmp/vendor
-            brew install cmake
+            brew reinstall cmake
             mkdir build
             cd build
             cmake .. -DUSE_CUDA=OFF -DCMAKE_BUILD_TYPE=Release
@@ -147,7 +147,7 @@ jobs:
         env:
           DECORD_LOCAL_VERSION_SUFFIX: +cu124
           CIBW_BUILD: ${{ matrix.pybuilds }}
-          CIBW_SKIP: "cp*-manylinux_i686 cp*-musllinux* cp*-win32 pp*"
+          CIBW_SKIP: "cp*-manylinux_i686 cp*-musllinux* cp*-win32"
           CIBW_MANYLINUX_X86_64_IMAGE: manylinux2014
           CIBW_MANYLINUX_AARCH64_IMAGE: manylinux2014
           CIBW_TEST_SKIP: "*"
@@ -176,7 +176,7 @@ jobs:
 
             echo "--- Installing CUDA Toolkit and build dependencies ---"
             # Install specific CUDA version and other build tools
-            yum -y module install nvidia-driver
+            yum install -y nvidia-driver
             yum install -y \
             cuda-compiler-12-4 \
             cuda-libraries-12-4 \
