@@ -176,7 +176,7 @@ jobs:
 
             echo "--- Installing CUDA Toolkit and build dependencies ---"
             # Install specific CUDA version and other build tools
-            yum -y module install nvidia-driver:open-dkms
+            yum -y module install nvidia-driver
             yum install -y \
             cuda-compiler-12-4 \
             cuda-libraries-12-4 \
