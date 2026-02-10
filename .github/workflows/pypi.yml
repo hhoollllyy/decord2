@@ -80,11 +80,11 @@ jobs:
           CIBW_SKIP: "cp*-manylinux_i686 cp*-musllinux* cp*-win32"
           CIBW_MANYLINUX_X86_64_IMAGE: manylinux2014
           CIBW_MANYLINUX_AARCH64_IMAGE: manylinux2014
-          CIBW_TEST_SKIP: "cp311-* cp312-* cp313-* pp*"
+          CIBW_TEST_SKIP: "cp311-* cp312-* cp313-*"
           CIBW_BEFORE_BUILD_LINUX: |
             python scripts/fetch-vendor.py --config-file scripts/ffmpeg-8.0.json /tmp/vendor
             yum install -y epel-release
-            yum install -y cmake make gcc gcc-c++ pkgconfig libbsd-devel soxr-devel alsa-lib-devel openssl-devel compat-openssl10
+            yum install -y cmake make gcc gcc-c++ pkgconfig libbsd-devel soxr-devel alsa-lib-devel openssl-devel openssl-devel
             rm -f /tmp/vendor/lib/libsoxr.so*
             mkdir build
             cd build
@@ -93,7 +93,7 @@ jobs:
             cp libdecord.so ..
           CIBW_BEFORE_BUILD_MACOS: |
             python scripts/fetch-vendor.py --config-file scripts/ffmpeg-8.0.json /tmp/vendor
-            brew reinstall cmake
+            brew install cmake
             mkdir build
             cd build
             cmake .. -DUSE_CUDA=OFF -DCMAKE_BUILD_TYPE=Release
@@ -183,7 +183,7 @@ jobs:
             cuda-libraries-devel-12-4 \
             cuda-toolkit-12-4 \
             cudnn
-            yum install -y cmake make gcc gcc-c++ pkgconfig libbsd-devel soxr-devel alsa-lib-devel compat-openssl10
+            yum install -y cmake make gcc gcc-c++ pkgconfig libbsd-devel soxr-devel alsa-lib-devel openssl-devel
             echo "--- Installing GCC Toolset 11 ---"
             yum install -y gcc-toolset-11
 
