@@ -33,8 +33,8 @@ jobs:
     steps:
       - uses: actions/checkout@v5
         with:
+          ref: v3.0.0
           submodules: recursive
-      - run: git checkout v3.0.0
           
       - name: Free up disk space
         if: ${{ runner.os == 'Linux' }}
@@ -188,7 +188,7 @@ jobs:
             yum install -y devtoolset-11-gcc devtoolset-11-gcc-c++
 
             # Enable the GCC 11 toolset for the rest of this script
-            source /opt/rh/devtoolset-11-gcc/enable
+            source /opt/rh/devtoolset-11/enable
 
             echo "--- Verifying CUDA installation ---"
             # The 'export' is not needed here as the CIBW_ENVIRONMENT_LINUX var will set the path later.
