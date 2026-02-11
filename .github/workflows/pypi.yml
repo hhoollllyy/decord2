@@ -200,8 +200,8 @@ jobs:
           CIBW_BEFORE_BUILD_LINUX: |
             set -ex
             echo "--- Installing GCC Toolset 11 ---"
-            yum install -y gcc-toolset-11
-            source /opt/rh/gcc-toolset-11/enable
+            yum install -y devtoolset-11-gcc devtoolset-11-gcc-c++
+            source /opt/rh/devtoolset-11/enable
             python scripts/fetch-vendor.py --config-file scripts/ffmpeg-8.0.json /tmp/vendor
             rm -f /tmp/vendor/lib/libsoxr.so*
 
